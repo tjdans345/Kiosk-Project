@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="listbinding.js"></script>
+    <style>
+        #allList {
+            background-color : lightblue;
+            padding : 16px;
+        }
+        #myList {
+            background-color : lightcoral;
+            padding : 16px;
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <ul id = "allList">
+        <li class="allListItem">item01</li>
+        <li class="allListItem">item02</li>
+        <li class="allListItem">item03</li>
+        <li class="allListItem">item04</li>
+    </ul>
+    <ul id ="myList">
+        <!--- To be filled by Java Script --->
+    </ul>
+
+    <script>
+        let clickItem = document.querySelectorAll(".allListItem");
+        let clickData = [];
+
+        for(let i = 0; i < clickItem.length; i++) {
+            clickData.push(clickItem[i].innerHTML)
+            console.log(clickData)
+            clickItem[i].addEventListener("click", function() {
+                // test(clickData[i]);
+                // listBinding.add("agathe");
+                
+                test(clickData[i]);
+            });
+        }
+
+        function test(test){
+            console.log(test);
+            listBinding.add(test);
+        }
+    </script>
+</body>
+</html>
