@@ -229,6 +229,12 @@ body .ir_su {
   height: 100%;
   display: inline-block;
 }
+.wrap .wrap__sects .sect__left .left_content .wrap__left .test-div {
+  width: 100%;
+  padding: 16px 0;
+  background-color: tomato;
+  border: 1px solid #ddd;
+}
 .wrap .wrap__sects .sect__left .left_content .wrap__left .menu__wrap {
   width: 100%;
   height: 100%;
@@ -237,6 +243,7 @@ body .ir_su {
   flex-wrap: wrap;
   padding: 16px;
   box-sizing: border-box;
+  overflow-y: scroll;
 }
 .wrap .wrap__sects .sect__left .left_content .wrap__left .menu__wrap .menu {
   width: 44%;

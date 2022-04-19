@@ -22,13 +22,10 @@
         margin-bottom: 16px;
         padding: 16px;
         border: 1px solid #fff;
-        display: none;
+        /* display: none; */
       }
       .cont:last-child {
         margin-bottom: none;
-      }
-      .cont.active {
-        display: block;
       }
     </style>
   </head>
@@ -39,35 +36,27 @@
       <li onclick="openTab(event, 'tab3')">sandwich</li>
     </div>
     <div class="cont_wrap">
-      <div id="tab1" class="cont active">item01</div>
+      <div id="tab1" class="cont">item01</div>
       <div id="tab2" class="cont">item02</div>
       <div id="tab3" class="cont">item03</div>
     </div>
+    <div class="item_wrap"></div>
     <script>
       const coffeeMenus = [
         {
           code: 100,
           name: "아메리카노",
-          quantity: 1,
           price: "3000",
         },
         {
           code: 101,
           name: "아이스아메리카노",
-          quantity: 1,
           price: "3500",
         },
         {
           code: 102,
           name: "카페라떼",
-          quantity: 1,
           price: "4000",
-        },
-        {
-          code: 103,
-          name: "아이스카페라떼",
-          quantity: 1,
-          price: "4500",
         },
       ];
       const teaMenus = [
@@ -145,6 +134,36 @@
         document.getElementById(tabName).style.display = "block";
         evt.currentTarget.className += " active";
       }
+
+      const menuArray = [coffeeMenus, teaMenus, sandwichMenus];
+
+      function getList(menuArray) {
+        for (let i = 0; i < conts.length; i++) {
+          let conts = document.getElementsByClassName("cont");
+          let menuWrap = document.createElement("ul");
+          menuWrap.classList.add("menu_wrap");
+          conts[i].appendChild(menuWrap);
+
+          for (let j = 0; j < menuArray.length; j++) {
+            let menuList = document.createElement("li");
+            menuList.classList.add("menu");
+            menuWrap.appendChild(menuList);
+            let menuNamePlace = document.createElement("span");
+            menuNamePlace.classList.add("menu_name");
+            menuList.appendChild(menuNamePlace);
+            let menuName = document.createTextNode(menuArray[i].name);
+            menuNamePlace.appendChild(menuName);
+
+            let menuPricePlace = document.createElement("span");
+            menuPricePlace.classList.add("menu_price");
+            menuList.appendChild(menuPricePlace);
+            let menuPrice = document.createTextNode(menuArray[i].price);
+            menuPricePlace.appendChild(menuPrice);
+          }
+        }
+      }
+
+      getList(menuArray[0]);
     </script>
   </body>
 </html>

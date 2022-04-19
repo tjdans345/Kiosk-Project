@@ -256,6 +256,13 @@ body {
           height: 100%;
           display: inline-block;
 
+          .test-div {
+            width: 100%;
+            padding: 16px 0;
+            background-color: tomato;
+            border: 1px solid #ddd;
+          }
+
           .menu__wrap {
             width: 100%;
             height: 100%;
@@ -264,6 +271,7 @@ body {
             flex-wrap: wrap;
             padding: menu.$space_default;
             box-sizing: border-box;
+            overflow-y: scroll;
 
             .menu {
               width: menu.$menu_width;

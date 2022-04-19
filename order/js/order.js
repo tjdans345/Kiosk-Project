@@ -189,12 +189,54 @@ const sandwichMenus = [
   },
 ];
 
-let menuArea = document.getElementById("menu_area");
-let menuWrap = document.createElement("div");
+const menuArea = document.getElementById("menu_area");
+const menuWrap = document.createElement("div");
 menuWrap.classList.add("menu__wrap");
 menuArea.appendChild(menuWrap);
 
+const tabList = document.querySelectorAll(".tab");
 const menuArray = [coffeeMenus, teaMenus, sandwichMenus];
+
+for (let i = 0; i < tabList.length; i++) {
+  const testDiv = document.createElement("div");
+  testDiv.id = `test-div${[i]}`;
+  testDiv.classList.add("test-div");
+  menuArea.appendChild(testDiv);
+
+  tabList[i].addEventListener("click", function () {
+    for (let j = 0; j < tabList.length; j++) {
+      tabList[j].classList.remove("active");
+    }
+    this.classList.add("active");
+    console.log(`${tabList[i].innerHTML}`);
+  });
+
+  const testMenuCoffee = document.getElementById(`test-div${[0]}`);
+  const testMenuTea = document.getElementById(`test-div${[1]}`);
+  const testMenuSandwich = document.getElementById(`test-div${[2]}`);
+
+  function bringList(menuArray) {
+    for (let h = 0; h < menuArray.length; h++) {
+      const testMenuList = document.createElement("li");
+      testMenuList.classList.add("test-menu");
+      testMenuCoffee.appendChild(testMenuList);
+
+      const testMenuNamePlace = document.createElement("span");
+      testMenuNamePlace.classList.add("menu_name");
+      testMenuList.appendChild(testMenuNamePlace);
+      const testMenuName = document.createTextNode(menuArray[h].name);
+      testMenuList.appendChild(testMenuName);
+
+      const testMenuPricePlace = document.createElement("span");
+      testMenuPricePlace.classList.add("menu_name");
+      testMenuList.appendChild(testMenuPricePlace);
+      const testMenuPrice = document.createTextNode(menuArray[h].price);
+      testMenuList.appendChild(testMenuPrice);
+    }
+  }
+}
+
+bringList(menuArray[0]);
 
 function getList(menuArray) {
   for (let i = 0; i < menuArray.length; i++) {
@@ -275,15 +317,4 @@ function getList(menuArray) {
   }
 }
 
-const activeMenu = getList(menuArray[0]);
-
-const tabList = document.querySelectorAll(".tab");
-
-for (i = 0; i < tabList.length; i++) {
-  tabList[i].addEventListener("click", function () {
-    for (j = 0; j < tabList.length; j++) {
-      tabList[j].classList.remove("active");
-    }
-    this.classList.add("active");
-  });
-}
+getList(menuArray[0]);
