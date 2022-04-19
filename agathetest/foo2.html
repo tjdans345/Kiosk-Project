@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .tab {
+        background-color: lightblue;
+        padding: 16px;
+      }
+      li.active {
+        background-color: steelblue;
+        color: #fff;
+      }
+      .cont_wrap {
+        background-color: lightcoral;
+        padding: 16px;
+      }
+      .cont {
+        margin-bottom: 16px;
+        padding: 16px;
+        border: 1px solid #fff;
+        display: none;
+      }
+      .cont:last-child {
+        margin-bottom: none;
+      }
+      .cont.active {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="tab">
+      <li class="active" onclick="openTab(event, 'tab1')">coffee</li>
+      <li onclick="openTab(event, 'tab2')">tea</li>
+      <li onclick="openTab(event, 'tab3')">sandwich</li>
+    </div>
+    <div class="cont_wrap">
+      <div id="tab1" class="cont active">item01</div>
+      <div id="tab2" class="cont">item02</div>
+      <div id="tab3" class="cont">item03</div>
+    </div>
+    <script>
+      const coffeeMenus = [
+        {
+          code: 100,
+          name: "아메리카노",
+          quantity: 1,
+          price: "3000",
+        },
+        {
+          code: 101,
+          name: "아이스아메리카노",
+          quantity: 1,
+          price: "3500",
+        },
+        {
+          code: 102,
+          name: "카페라떼",
+          quantity: 1,
+          price: "4000",
+        },
+        {
+          code: 103,
+          name: "아이스카페라떼",
+          quantity: 1,
+          price: "4500",
+        },
+      ];
+      const teaMenus = [
+        {
+          code: 200,
+          name: "얼그레이",
+          quantity: 1,
+          price: "3000",
+        },
+        {
+          code: 201,
+          name: "아이스얼그레이",
+          quantity: 1,
+          price: "3500",
+        },
+        {
+          code: 202,
+          name: "잉글리쉬브랙퍼스트",
+          quantity: 1,
+          price: "3000",
+        },
+        {
+          code: 203,
+          name: "아이스잉글리쉬브랙퍼스트",
+          quantity: 1,
+          price: "3500",
+        },
+      ];
+      const sandwichMenus = [
+        {
+          code: 300,
+          name: "잠봉뵈르",
+          quantity: 1,
+          price: "6000",
+        },
+        {
+          code: 301,
+          name: "치킨클럽샌드위치",
+          quantity: 1,
+          price: "6500",
+        },
+        {
+          code: 302,
+          name: "BLT샌드위치",
+          quantity: 1,
+          price: "6500",
+        },
+        {
+          code: 303,
+          name: "아보카도명란샌드위치",
+          quantity: 1,
+          price: "6500",
+        },
+      ];
+
+      const tabMenus = document.querySelectorAll(".tab > li");
+      const conts = document.querySelectorAll(".cont");
+
+      for (let i = 0; i < tabMenus.length; i++) {
+        tabMenus[i].addEventListener("click", function () {
+          for (let j = 0; j < tabMenus.length; j++) {
+            tabMenus[j].classList.remove("active");
+          }
+          this.classList.add("active");
+        });
+      }
+
+      function openTab(evt, tabName) {
+        for (let i = 0; i < conts.length; i++) {
+          conts[i].style.display = "none";
+        }
+        for (let j = 0; j < tabMenus.length; j++) {
+          tabMenus[j].classList.remove("active");
+        }
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+      }
+    </script>
+  </body>
+</html>

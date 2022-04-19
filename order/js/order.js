@@ -73,95 +73,6 @@ const coffeeMenus = [
   },
 ];
 
-let MenuCoffeeWrap = document.getElementById("menu_coffee_area");
-
-function test(menuarray) {
-  for (let i = 0; i < menuarray.length; i++) {}
-}
-
-coffeeMenus.forEach((coffeeMenu, index) => {
-  console.log(`${coffeeMenu.name} ${coffeeMenu.price}`);
-  let menuList = document.createElement("li");
-  menuList.classList.add("menu");
-  MenuCoffeeWrap.appendChild(menuList);
-
-  let menuNamePlace = document.createElement("span");
-  menuNamePlace.classList.add("menu_name");
-  menuList.appendChild(menuNamePlace);
-
-  let menuName = document.createTextNode(coffeeMenu.name);
-  menuNamePlace.appendChild(menuName);
-
-  let menuPricePlace = document.createElement("span");
-  menuPricePlace.classList.add("menu_price");
-  menuList.appendChild(menuPricePlace);
-
-  let menuPrice = document.createTextNode(coffeeMenu.price);
-  menuPricePlace.appendChild(menuPrice);
-
-  menuList.addEventListener("click", () => {
-    console.log(menuList.id);
-    // 1. wrap__cart 찾기
-    // 2. createElement div 만들기
-    // 2-1. name, price 넣기
-    // 3. appendChild 로 warp__cart에 추가
-
-    let wrapCart = document.getElementById("wrap_cart_area");
-    let cartItem = document.createElement("div");
-    cartItem.id = `${coffeeMenu.code}${index}`;
-    cartItem.classList.add("cart_item");
-    wrapCart.appendChild(cartItem);
-
-    let cartItemTop = document.createElement("div");
-    cartItemTop.classList.add("top");
-    cartItem.appendChild(cartItemTop);
-    let cartItemTitle = document.createElement("span");
-    cartItemTitle.innerHTML = `${coffeeMenu.name}`;
-    cartItemTop.appendChild(cartItemTitle);
-    let cartItemDelete = document.createElement("button");
-    cartItemDelete.classList.add("delete");
-    cartItemDelete.innerHTML = `X`;
-    cartItemTop.appendChild(cartItemDelete);
-
-    cartItemDelete.addEventListener("click", function () {
-      //   console.log(cartItem.id);
-      wrapCart.removeChild(document.getElementById(cartItem.id));
-    });
-
-    let cartItemMiddle = document.createElement("div");
-    cartItemMiddle.classList.add("middle");
-    cartItem.appendChild(cartItemMiddle);
-    let cartItemQuantity = document.createElement("span");
-    cartItemQuantity.innerHTML = "수량";
-    cartItemMiddle.appendChild(cartItemQuantity);
-    let cartItemQuantityWrap = document.createElement("div");
-    cartItemQuantityWrap.classList.add("wrap__quantity");
-    cartItemMiddle.appendChild(cartItemQuantityWrap);
-    let cartItemPlus = document.createElement("button");
-    cartItemPlus.classList.add("plus");
-    cartItemPlus.innerHTML = "+";
-    cartItemQuantityWrap.appendChild(cartItemPlus);
-    let cartItemSelectedQuantity = document.createElement("span");
-    cartItemSelectedQuantity.classList.add("item_quantity");
-    cartItemSelectedQuantity.innerHTML = 1;
-    cartItemQuantityWrap.appendChild(cartItemSelectedQuantity);
-    let cartItemMinus = document.createElement("button");
-    cartItemMinus.classList.add("minus");
-    cartItemMinus.innerHTML = "-";
-    cartItemQuantityWrap.appendChild(cartItemMinus);
-
-    let cartItemBottom = document.createElement("div");
-    cartItemBottom.classList.add("bottom");
-    cartItem.appendChild(cartItemBottom);
-    let cartItemPriceTitle = document.createElement("span");
-    cartItemPriceTitle.innerHTML = "수량";
-    cartItemBottom.appendChild(cartItemPriceTitle);
-    let cartItemPrice = document.createElement("span");
-    cartItemPrice.innerHTML = `${coffeeMenu.price}`;
-    cartItemBottom.appendChild(cartItemPrice);
-  });
-});
-
 /*   Tea Menu Lists   */
 const teaMenus = [
   {
@@ -250,29 +161,6 @@ const teaMenus = [
   },
 ];
 
-let MenuTeaWrap = document.getElementById("menu_tea_area");
-
-teaMenus.forEach((teaMenu, index) => {
-  console.log(`${teaMenu.name} ${teaMenu.price}`);
-  let menuList = document.createElement("li");
-  menuList.classList.add("menu");
-  MenuTeaWrap.appendChild(menuList);
-
-  let menuNamePlace = document.createElement("span");
-  menuNamePlace.classList.add("menu_name");
-  menuList.appendChild(menuNamePlace);
-
-  let menuName = document.createTextNode(teaMenu.name);
-  menuNamePlace.appendChild(menuName);
-
-  let menuPricePlace = document.createElement("span");
-  menuPricePlace.classList.add("menu_price");
-  menuList.appendChild(menuPricePlace);
-
-  let menuPrice = document.createTextNode(teaMenu.price);
-  menuPricePlace.appendChild(menuPrice);
-});
-
 /*   Tea Menu Lists   */
 const sandwichMenus = [
   {
@@ -301,25 +189,101 @@ const sandwichMenus = [
   },
 ];
 
-let MenuSandwichWrap = document.getElementById("menu_sandwich_area");
+let menuArea = document.getElementById("menu_area");
+let menuWrap = document.createElement("div");
+menuWrap.classList.add("menu__wrap");
+menuArea.appendChild(menuWrap);
 
-sandwichMenus.forEach((sandwichMenu, index) => {
-  console.log(`${sandwichMenu.name} ${sandwichMenu.price}`);
-  let menuList = document.createElement("li");
-  menuList.classList.add("menu");
-  MenuSandwichWrap.appendChild(menuList);
+const menuArray = [coffeeMenus, teaMenus, sandwichMenus];
 
-  let menuNamePlace = document.createElement("span");
-  menuNamePlace.classList.add("menu_name");
-  menuList.appendChild(menuNamePlace);
+function getList(menuArray) {
+  for (let i = 0; i < menuArray.length; i++) {
+    // console.log(`${menuArray[i].name}`);
 
-  let menuName = document.createTextNode(sandwichMenu.name);
-  menuNamePlace.appendChild(menuName);
+    let menuList = document.createElement("li");
+    menuList.classList.add("menu");
+    menuWrap.appendChild(menuList);
 
-  let menuPricePlace = document.createElement("span");
-  menuPricePlace.classList.add("menu_price");
-  menuList.appendChild(menuPricePlace);
+    let menuNamePlace = document.createElement("span");
+    menuNamePlace.classList.add("menu_name");
+    menuList.appendChild(menuNamePlace);
+    let menuName = document.createTextNode(menuArray[i].name);
+    menuNamePlace.appendChild(menuName);
 
-  let menuPrice = document.createTextNode(sandwichMenu.price);
-  menuPricePlace.appendChild(menuPrice);
-});
+    let menuPricePlace = document.createElement("span");
+    menuPricePlace.classList.add("menu_price");
+    menuList.appendChild(menuPricePlace);
+    let menuPrice = document.createTextNode(menuArray[i].price);
+    menuPricePlace.appendChild(menuPrice);
+
+    menuList.addEventListener("click", function () {
+      // console.log("test");
+      let wrapCart = document.getElementById("wrap_cart_area");
+      let cartItem = document.createElement("div");
+      cartItem.id = `${menuArray[i].code}`;
+      cartItem.classList.add("cart_item");
+      wrapCart.appendChild(cartItem);
+
+      let cartItemTop = document.createElement("div");
+      cartItemTop.classList.add("top");
+      cartItem.appendChild(cartItemTop);
+      let cartItemTitle = document.createElement("span");
+      cartItemTitle.innerHTML = `${menuArray[i].name}`;
+      cartItemTop.appendChild(cartItemTitle);
+      let cartItemDelete = document.createElement("button");
+      cartItemDelete.classList.add("delete");
+      cartItemDelete.innerHTML = `X`;
+      cartItemTop.appendChild(cartItemDelete);
+
+      cartItemDelete.addEventListener("click", function () {
+        //   console.log(cartItem.id);
+        wrapCart.removeChild(document.getElementById(cartItem.id));
+      });
+
+      let cartItemMiddle = document.createElement("div");
+      cartItemMiddle.classList.add("middle");
+      cartItem.appendChild(cartItemMiddle);
+      let cartItemQuantity = document.createElement("span");
+      cartItemQuantity.innerHTML = "수량";
+      cartItemMiddle.appendChild(cartItemQuantity);
+      let cartItemQuantityWrap = document.createElement("div");
+      cartItemQuantityWrap.classList.add("wrap__quantity");
+      cartItemMiddle.appendChild(cartItemQuantityWrap);
+      let cartItemPlus = document.createElement("button");
+      cartItemPlus.classList.add("plus");
+      cartItemPlus.innerHTML = "+";
+      cartItemQuantityWrap.appendChild(cartItemPlus);
+      let cartItemSelectedQuantity = document.createElement("span");
+      cartItemSelectedQuantity.classList.add("item_quantity");
+      cartItemSelectedQuantity.innerHTML = 1;
+      cartItemQuantityWrap.appendChild(cartItemSelectedQuantity);
+      let cartItemMinus = document.createElement("button");
+      cartItemMinus.classList.add("minus");
+      cartItemMinus.innerHTML = "-";
+      cartItemQuantityWrap.appendChild(cartItemMinus);
+
+      let cartItemBottom = document.createElement("div");
+      cartItemBottom.classList.add("bottom");
+      cartItem.appendChild(cartItemBottom);
+      let cartItemPriceTitle = document.createElement("span");
+      cartItemPriceTitle.innerHTML = "가격";
+      cartItemBottom.appendChild(cartItemPriceTitle);
+      let cartItemPrice = document.createElement("span");
+      cartItemPrice.innerHTML = `${menuArray[i].price}`;
+      cartItemBottom.appendChild(cartItemPrice);
+    });
+  }
+}
+
+const activeMenu = getList(menuArray[0]);
+
+const tabList = document.querySelectorAll(".tab");
+
+for (i = 0; i < tabList.length; i++) {
+  tabList[i].addEventListener("click", function () {
+    for (j = 0; j < tabList.length; j++) {
+      tabList[j].classList.remove("active");
+    }
+    this.classList.add("active");
+  });
+}

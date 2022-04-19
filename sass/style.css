@@ -15,8 +15,34 @@ body {
   /* 의미있는 이미지의 대체 텍스트로 이미지가 없어도 대체 텍스트를 보여주고자 할 때(WA IR) */
   /* 대체 텍스트가 아닌 접근성을 위한 숨김 텍스트를 제공할 때 */
 }
-body body, body div, body ul, body li, body dl, body dd, body dt, body ol, body h1, body h2, body h3, body h4, body h5, body h6, body input, body fieldset, body legend, body p, body select,
-body table, body th, body td, body tr, body textarea, body button, body form, body figure, body figcaption {
+body body,
+body div,
+body ul,
+body li,
+body dl,
+body dd,
+body dt,
+body ol,
+body h1,
+body h2,
+body h3,
+body h4,
+body h5,
+body h6,
+body input,
+body fieldset,
+body legend,
+body p,
+body select,
+body table,
+body th,
+body td,
+body tr,
+body textarea,
+body button,
+body form,
+body figure,
+body figcaption {
   margin: 0;
   padding: 0;
 }
@@ -26,20 +52,33 @@ body a {
 body a:hover {
   text-decoration: none;
 }
-body body, body input, body textarea, body select, body button, body table {
+body body,
+body input,
+body textarea,
+body select,
+body button,
+body table {
   font-family: "Noto Sans KR", sans-serif;
   font-size: 1rem;
 }
-body em, body address {
+body em,
+body address {
   font-style: normal;
 }
 body em {
   color: red;
 }
-body ul, body li, body ol {
+body ul,
+body li,
+body ol {
   list-style: none;
 }
-body h1, body h2, body h3, body h4, body h5, body h6 {
+body h1,
+body h2,
+body h3,
+body h4,
+body h5,
+body h6 {
   font-size: 1rem;
   font-weight: 500;
   display: inline-block;
@@ -47,7 +86,8 @@ body h1, body h2, body h3, body h4, body h5, body h6 {
 body button {
   border: 0;
 }
-body img, body video {
+body img,
+body video {
   width: 100%;
 }
 body img {
@@ -57,7 +97,8 @@ body img {
 body img {
   border: 0;
 }
-body .clearfix:before, body .clearfix:after {
+body .clearfix:before,
+body .clearfix:after {
   display: block;
   content: "";
   line-height: 0;
@@ -171,7 +212,8 @@ body .ir_su {
   box-sizing: border-box;
   cursor: pointer;
 }
-.wrap .wrap__sects .sect__left .menu_tabs ul :hover {
+.wrap .wrap__sects .sect__left .menu_tabs ul :hover,
+.wrap .wrap__sects .sect__left .menu_tabs ul .active {
   color: #f4f4f4;
   background-color: #e27575;
 }
@@ -185,13 +227,18 @@ body .ir_su {
 .wrap .wrap__sects .sect__left .left_content .wrap__left {
   width: 100%;
   height: 100%;
+  display: inline-block;
+}
+.wrap .wrap__sects .sect__left .left_content .wrap__left .menu__wrap {
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
   padding: 16px;
   box-sizing: border-box;
 }
-.wrap .wrap__sects .sect__left .left_content .wrap__left .menu {
+.wrap .wrap__sects .sect__left .left_content .wrap__left .menu__wrap .menu {
   width: 44%;
   height: 120px;
   box-sizing: border-box;
@@ -205,26 +252,26 @@ body .ir_su {
   box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2), 0 6px 12px 0 rgba(0, 0, 0, 0.19);
   transition: cubic-bezier(0.89, 0.28, 0.64, 0.99);
 }
-.wrap .wrap__sects .sect__left .left_content .wrap__left .menu .menu_name {
+.wrap .wrap__sects .sect__left .left_content .wrap__left .menu__wrap .menu .menu_name {
   height: 70%;
   display: flex;
   align-items: center;
 }
-.wrap .wrap__sects .sect__left .left_content .wrap__left .menu .menu_price {
+.wrap .wrap__sects .sect__left .left_content .wrap__left .menu__wrap .menu .menu_price {
   height: 30%;
 }
-.wrap .wrap__sects .sect__left .left_content .wrap__left .menu:hover {
+.wrap .wrap__sects .sect__left .left_content .wrap__left .menu__wrap .menu:hover {
   transform: translateY(-8px);
 }
-.wrap .wrap__sects .sect__left .left_content .wrap__left button {
+.wrap .wrap__sects .sect__left .left_content .wrap__left .menu__wrap button {
   margin-bottom: 20px;
 }
-.wrap .wrap__sects .sect__left .left_content .wrap__left > div {
+.wrap .wrap__sects .sect__left .left_content .wrap__left .menu__wrap > div {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.wrap .wrap__sects .sect__left .left_content .wrap__left > div p {
+.wrap .wrap__sects .sect__left .left_content .wrap__left .menu__wrap > div p {
   font-size: 2rem;
 }
 .wrap .wrap__sects .sect__left .left_content .menu_area {
@@ -278,8 +325,8 @@ body .ir_su {
 }
 .wrap .wrap__sects .sect__right .cart_content .wrap__cart .cart_item > div button {
   display: inline-block;
-  width: 32px;
-  height: 32px;
+  width: 2rem;
+  height: 2rem;
 }
 .wrap .wrap__sects .sect__right .cart_content .wrap__cart .cart_item > div .delete {
   background-color: transparent;
@@ -289,6 +336,10 @@ body .ir_su {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.wrap .wrap__sects .sect__right .cart_content .wrap__cart .cart_item > div .wrap__quantity .item_quantity {
+  width: 2rem;
+  text-align: center;
 }
 .wrap .wrap__sects .sect__right .cart_content .wrap__checkout .wrap__total {
   width: 100%;
