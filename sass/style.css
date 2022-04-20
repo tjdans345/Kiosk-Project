@@ -335,6 +335,14 @@ body .ir_su {
   width: 2rem;
   height: 2rem;
 }
+.wrap .wrap__sects .sect__right .cart_content .wrap__cart .cart_item > div .item_quantity {
+  border: none;
+}
+.wrap .wrap__sects .sect__right .cart_content .wrap__cart .cart_item > div .item_price {
+  width: 4rem;
+  text-align: right;
+  border: none;
+}
 .wrap .wrap__sects .sect__right .cart_content .wrap__cart .cart_item > div .delete {
   background-color: transparent;
 }

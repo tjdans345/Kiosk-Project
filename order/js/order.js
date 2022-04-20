@@ -189,56 +189,35 @@ const sandwichMenus = [
   },
 ];
 
-const menuArea = document.getElementById("menu_area");
-const menuWrap = document.createElement("div");
-menuWrap.classList.add("menu__wrap");
-menuArea.appendChild(menuWrap);
-
 const tabList = document.querySelectorAll(".tab");
-const menuArray = [coffeeMenus, teaMenus, sandwichMenus];
 
+/* tab메뉴 클릭 시 배경색 바뀜 */
 for (let i = 0; i < tabList.length; i++) {
-  const testDiv = document.createElement("div");
-  testDiv.id = `test-div${[i]}`;
-  testDiv.classList.add("test-div");
-  menuArea.appendChild(testDiv);
-
   tabList[i].addEventListener("click", function () {
     for (let j = 0; j < tabList.length; j++) {
       tabList[j].classList.remove("active");
     }
     this.classList.add("active");
-    console.log(`${tabList[i].innerHTML}`);
+    let tabListId = `${tabList[i].innerHTML}`;
+    // console.log(tabListId);
   });
-
-  const testMenuCoffee = document.getElementById(`test-div${[0]}`);
-  const testMenuTea = document.getElementById(`test-div${[1]}`);
-  const testMenuSandwich = document.getElementById(`test-div${[2]}`);
-
-  function bringList(menuArray) {
-    for (let h = 0; h < menuArray.length; h++) {
-      const testMenuList = document.createElement("li");
-      testMenuList.classList.add("test-menu");
-      testMenuCoffee.appendChild(testMenuList);
-
-      const testMenuNamePlace = document.createElement("span");
-      testMenuNamePlace.classList.add("menu_name");
-      testMenuList.appendChild(testMenuNamePlace);
-      const testMenuName = document.createTextNode(menuArray[h].name);
-      testMenuList.appendChild(testMenuName);
-
-      const testMenuPricePlace = document.createElement("span");
-      testMenuPricePlace.classList.add("menu_name");
-      testMenuList.appendChild(testMenuPricePlace);
-      const testMenuPrice = document.createTextNode(menuArray[h].price);
-      testMenuList.appendChild(testMenuPrice);
-    }
-  }
 }
 
-bringList(menuArray[0]);
+const menuArea = document.getElementById("menu_area");
+const menuWrap = document.createElement("div");
+menuWrap.classList.add("menu__wrap");
+menuArea.appendChild(menuWrap);
 
-function getList(menuArray) {
+const menuArray = [coffeeMenus, teaMenus, sandwichMenus];
+
+/* menuArray내 각 배열을 화면에 리스트로 만들기 */
+function getList(menuArray, type) {
+  if (type !== "first") {
+    /* 모든 자식 엘리먼트 삭제하기 */
+    while (menuWrap.hasChildNodes()) {
+      menuWrap.removeChild(menuWrap.firstChild);
+    }
+  }
   for (let i = 0; i < menuArray.length; i++) {
     // console.log(`${menuArray[i].name}`);
 
@@ -277,11 +256,6 @@ function getList(menuArray) {
       cartItemDelete.innerHTML = `X`;
       cartItemTop.appendChild(cartItemDelete);
 
-      cartItemDelete.addEventListener("click", function () {
-        //   console.log(cartItem.id);
-        wrapCart.removeChild(document.getElementById(cartItem.id));
-      });
-
       let cartItemMiddle = document.createElement("div");
       cartItemMiddle.classList.add("middle");
       cartItem.appendChild(cartItemMiddle);
@@ -295,9 +269,12 @@ function getList(menuArray) {
       cartItemPlus.classList.add("plus");
       cartItemPlus.innerHTML = "+";
       cartItemQuantityWrap.appendChild(cartItemPlus);
-      let cartItemSelectedQuantity = document.createElement("span");
+      let cartItemSelectedQuantity = document.createElement("input");
       cartItemSelectedQuantity.classList.add("item_quantity");
-      cartItemSelectedQuantity.innerHTML = 1;
+
+      cartItemSelectedQuantity.setAttribute("min", 0);
+      cartItemSelectedQuantity.setAttribute("max", 10);
+      cartItemSelectedQuantity.value = 1;
       cartItemQuantityWrap.appendChild(cartItemSelectedQuantity);
       let cartItemMinus = document.createElement("button");
       cartItemMinus.classList.add("minus");
@@ -311,10 +288,32 @@ function getList(menuArray) {
       cartItemPriceTitle.innerHTML = "가격";
       cartItemBottom.appendChild(cartItemPriceTitle);
       let cartItemPrice = document.createElement("span");
+      cartItemPrice.classList.add("item_price");
       cartItemPrice.innerHTML = `${menuArray[i].price}`;
       cartItemBottom.appendChild(cartItemPrice);
+
+      cartItemDelete.addEventListener("click", function () {
+        // console.log(cartItem.id);
+        wrapCart.removeChild(document.getElementById(cartItem.id));
+        // this.parentElement.parentElement.remove();
+      });
+
+      cartItemPlus.addEventListener("click", function () {
+        cartItemSelectedQuantity.value++;
+        const cartItemTotalPrice =
+          cartItemPrice.value * partInt(cartItemSelectedQuantity.innerHTML);
+      });
+      cartItemMinus.addEventListener("click", function () {
+        cartItemSelectedQuantity.value--;
+      });
     });
   }
 }
 
-getList(menuArray[0]);
+// getList(menuArray[1]);
+// 초기화가 필요한 것들
+const init = () => {
+  getList(menuArray[0], "first");
+};
+
+init();

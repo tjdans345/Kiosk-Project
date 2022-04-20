@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../../sass/style.css" />
-    <script defer src="../js/order.js"></script>
+
     <title>Grab your coffee!</title>
   </head>
   <body>
@@ -17,9 +17,21 @@
         <section class="sect__left">
           <nav class="menu_tabs">
             <ul>
-              <li class="tab tab_coffee active">Coffee</li>
-              <li class="tab tab_tea">Tea</li>
-              <li class="tab tab_sandwich">Sandwich</li>
+              <li
+                class="tab tab_coffee active"
+                onClick="getList(menuArray[0], 'second')"
+              >
+                Coffee
+              </li>
+              <li class="tab tab_tea" onClick="getList(menuArray[1], 'second')">
+                Tea
+              </li>
+              <li
+                class="tab tab_sandwich"
+                onClick="getList(menuArray[2], 'second')"
+              >
+                Sandwich
+              </li>
             </ul>
           </nav>
           <div class="left_content">
@@ -32,19 +44,15 @@
           <div class="cart_content">
             <div id="wrap_cart_area" class="wrap__cart"></div>
             <div class="wrap__checkout">
-              <div class="wrap__total total_quantity">
+              <div class="wrap__total">
                 <span>선택수량</span>
-                <span>4</span>
+                <span class="total_quantity">4</span>
               </div>
               <div class="wrap__total total_price">
                 <span>결제금액</span>
                 <span>11,000원</span>
               </div>
-              <button
-                type="button"
-                class="btn_line btn_lg payment"
-                onClick="location.href='payment.html'"
-              >
+              <button type="button" class="btn_line btn_lg payment">
                 결제하기
               </button>
             </div>
@@ -52,5 +60,7 @@
         </section>
       </div>
     </div>
+
+    <script defer src="../js/order.js"></script>
   </body>
 </html>

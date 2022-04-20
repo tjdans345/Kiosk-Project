@@ -378,6 +378,16 @@ body {
                 height: 2rem;
               }
 
+              .item_quantity {
+                border: none;
+              }
+
+              .item_price {
+                width: 4rem;
+                text-align: right;
+                border: none;
+              }
+
               .delete {
                 background-color: transparent;
               }
