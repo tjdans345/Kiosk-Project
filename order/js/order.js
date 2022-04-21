@@ -271,7 +271,7 @@ function getList(menuArray, type) {
       cartItemQuantityWrap.appendChild(cartItemPlus);
       let cartItemSelectedQuantity = document.createElement("input");
       cartItemSelectedQuantity.classList.add("item_quantity");
-
+      cartItemSelectedQuantity.setAttribute("type", "number");
       cartItemSelectedQuantity.setAttribute("min", 0);
       cartItemSelectedQuantity.setAttribute("max", 10);
       cartItemSelectedQuantity.value = 1;
