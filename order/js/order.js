@@ -220,7 +220,6 @@ function getList(menuArray, type) {
   }
   for (let i = 0; i < menuArray.length; i++) {
     // console.log(`${menuArray[i].name}`);
-
     let menuList = document.createElement("li");
     menuList.classList.add("menu");
     menuWrap.appendChild(menuList);
