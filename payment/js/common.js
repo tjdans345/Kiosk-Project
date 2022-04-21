@@ -3,7 +3,7 @@ const timeOut = () => {
   let min = "";
   let sec = "";
 
-  let x = setInterval(function () {
+  let timeInterval = setInterval(function () {
     // parserInt() : 정수 반환
     min = parseInt(time / 60); // 몫 계산
     sec = time % 60; // 나머지 계산
@@ -12,7 +12,7 @@ const timeOut = () => {
     time--;
 
     if (time < 0) {
-      clearInterval(x);
+      clearInterval(timeInterval);
       alert("시간 초과 입니다.");
       history.back();
     }
