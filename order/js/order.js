@@ -349,3 +349,10 @@ const goToPaymentPage = () => {
 
   location.href = "/payment/pages/payment.html";
 };
+
+const deleteMenu = (element) => {
+  selectMenuList = selectMenuList.filter(
+    (menu) => menu.code !== parseInt(element.id)
+  );
+  initSelectMenu();
+};
