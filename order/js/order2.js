@@ -225,13 +225,14 @@ const CartArea = document.getElementById("wrap_cart_area");
 
 /* menuArray내 각 배열을 화면에 리스트로 만들기 */
 function getList(menuArray) {
+  console.log(menuArray);
   /* 모든 자식 엘리먼트 삭제하기 */
   while (menuWrap.hasChildNodes()) {
     menuWrap.removeChild(menuWrap.firstChild);
   }
 
   for (let i = 0; i < menuArray.length; i++) {
-    let selectMenuForm = menuWrap.append(makeMenuList(menuArray[i]));
+    menuWrap.append(makeMenuList(menuArray[i]));
   }
 }
 
@@ -286,9 +287,7 @@ const addMenu = (menuObj) => {
       });
     }
   }
-
   initSelectMenu();
-
   // while (CartArea.hasChildNodes()) {
   //   CartArea.removeChild(CartArea.firstChild);
   // }
