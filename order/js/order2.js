@@ -244,6 +244,7 @@ const makeMenuList = (element) => {
   const selectMenuForm = document.createElement("li");
   selectMenuForm.className = "menu";
   selectMenuForm.id = element.idx;
+
   selectMenuForm.innerHTML = `
     <span class="menu_name">${element.name}</span>
     <span class="menu_price">${element.price}</span>
