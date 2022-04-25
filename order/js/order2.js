@@ -216,7 +216,7 @@ for (let i = 0; i < tabList.length; i++) {
   });
 }
 
-// 선택메뉴 리스트
+// 선택메뉴 리스트 배열
 let selectMenuList = [];
 
 const menuArray = [coffeeMenus, teaMenus, sandwichMenus];
@@ -225,13 +225,14 @@ const CartArea = document.getElementById("wrap_cart_area");
 
 /* menuArray내 각 배열을 화면에 리스트로 만들기 */
 function getList(menuArray) {
+  console.log(menuArray);
   /* 모든 자식 엘리먼트 삭제하기 */
   while (menuWrap.hasChildNodes()) {
     menuWrap.removeChild(menuWrap.firstChild);
   }
 
   for (let i = 0; i < menuArray.length; i++) {
-    let selectMenuForm = menuWrap.append(makeMenuList(menuArray[i]));
+    menuWrap.append(makeMenuList(menuArray[i]));
   }
 }
 
@@ -287,23 +288,7 @@ const addMenu = (menuObj) => {
       });
     }
   }
-
   initSelectMenu();
-
-  // while (CartArea.hasChildNodes()) {
-  //   CartArea.removeChild(CartArea.firstChild);
-  // }
-
-  // for (let i = 0; i < selectMenuList.length; i++) {
-  //   CartArea.append(makeSelectMenuList(selectMenuList[i]));
-  //   totalCount += selectMenuList[i].quntity;
-  //   totalPrice += selectMenuList[i].price * selectMenuList[i].quntity;
-  // }
-
-  // document.getElementById("total_count").innerText = totalCount;
-  // document.getElementById(
-  //   "total_price"
-  // ).innerText = `${totalPrice.toLocaleString()} 원`;
 };
 
 const initSelectMenu = () => {
@@ -398,3 +383,9 @@ const init = () => {
 };
 
 init();
+
+const goToPaymentPage = () => {
+  localStorage.setItem("selectMenuList", JSON.stringify(selectMenuList));
+
+  location.href = "/payment/pages/payment.html";
+};

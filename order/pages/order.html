@@ -35,7 +35,9 @@
             </ul>
           </nav>
           <div class="left_content">
-            <div class="wrap__left" id="menu_area"></div>
+            <div class="wrap__left" id="menu_area">
+              <div class="menu__wrap" id="menu_wrap"></div>
+            </div>
           </div>
         </section>
 
@@ -46,11 +48,11 @@
             <div class="wrap__checkout">
               <div class="wrap__total">
                 <span>선택수량</span>
-                <span class="total_quantity">4</span>
+                <span class="total_quantity" id="total_quantity">0</span>
               </div>
               <div class="wrap__total total_price">
                 <span>결제금액</span>
-                <span>11,000원</span>
+                <span id="total_price">0원</span>
               </div>
               <button
                 onclick="goToPaymentPage()"
@@ -67,6 +69,6 @@
       </div>
     </div>
 
-    <script defer src="../js/order.js"></script>
+    <script defer src="../js/order3.js"></script>
   </body>
 </html>

@@ -8,7 +8,9 @@ const timeOut = () => {
     min = parseInt(time / 60); // 몫 계산
     sec = time % 60; // 나머지 계산
 
-    document.getElementById("time_display").innerHTML = `${min} 분 ${sec} 초`;
+    document.getElementById(
+      "time_display"
+    ).innerHTML = ` <div>${min} 분 ${sec} 초</div> `;
     time--;
 
     if (time < 0) {
