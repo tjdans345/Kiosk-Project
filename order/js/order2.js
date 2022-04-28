@@ -260,33 +260,33 @@ const makeMenuList = (element) => {
 
 /**
  * 선택 메뉴 배열에 추가
- * @param {} menuObj
+ * @param {} element
  */
-const addMenu = (menuObj) => {
+const addMenu = (element) => {
   if (selectMenuList.length === 0) {
     selectMenuList.push({
-      code: menuObj.code,
-      name: menuObj.name,
-      price: menuObj.price,
-      totalPrice: menuObj.price,
+      code: element.code,
+      name: element.name,
+      price: element.price,
+      totalPrice: element.price,
       quantity: 1,
     });
   } else {
     if (
       selectMenuList.filter((menu) => {
-        return menu.code === menuObj.code;
+        return menu.code === element.code;
       }) < 1
     ) {
       selectMenuList.push({
-        code: menuObj.code,
-        name: menuObj.name,
-        price: menuObj.price,
-        totalPrice: menuObj.price,
+        code: element.code,
+        name: element.name,
+        price: element.price,
+        totalPrice: element.price,
         quantity: 1,
       });
     } else {
       selectMenuList.map((menu) => {
-        if (menu.code === menuObj.code) {
+        if (menu.code === element.code) {
           menu.quantity++;
           menu.totalPrice = menu.price * menu.quantity;
         }
@@ -324,7 +324,7 @@ const initSelectMenu = () => {
 const makeSelectMenuList = (element) => {
   const selectMenuForm = document.createElement("div");
   selectMenuForm.className = "cart_item";
-  selectMenuForm.id = element.idx;
+  selectMenuForm.id = element.code;
   selectMenuForm.innerHTML = `
     <div class="top">
       <span>${element.name}</span>

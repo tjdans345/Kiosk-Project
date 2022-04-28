@@ -97,7 +97,9 @@ const kakaoRestTest = () => {
 initSelectMenu();
 
 const postApi = (data) => {
-  const URL = "http://localhost:9090/kakao";
+  // const URL = "http://localhost:9090/kakao";
+  const URL = "http://192.168.0.18:9090/kakao";
+
   return fetch(`${URL}/test`, {
     method: "POST",
     headers: {

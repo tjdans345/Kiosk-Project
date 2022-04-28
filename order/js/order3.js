@@ -229,6 +229,7 @@ const pushMenu = (menuArrayObj) => {
       code: menuArrayObj.code,
       name: menuArrayObj.name,
       price: menuArrayObj.price,
+      totalPrice: menuArrayObj.price,
       quantity: 1,
     });
   } else {
@@ -237,21 +238,22 @@ const pushMenu = (menuArrayObj) => {
         return selectedMenu.code === menuArrayObj.code;
       }) < 1
     ) {
-      console.log("true");
+      console.log("새로 선택한 메뉴");
       selectedMenuList.push({
         code: menuArrayObj.code,
         name: menuArrayObj.name,
         price: menuArrayObj.price,
+        totalPrice: menuArrayObj.price,
         quantity: 1,
       });
     } else {
-      console.log("false");
+      console.log("기존에 선택한 메뉴");
       selectedMenuList.map((selectedMenu) => {
-        console.log(selectedMenu.code);
-        console.log(menuArrayObj.code);
-
+        // console.log(selectedMenu.code);
+        // console.log(menuArrayObj.code);
         if (selectedMenu.code === menuArrayObj.code) {
           selectedMenu.quantity++;
+          selectedMenu.totalPrice = selectedMenu.price * selectedMenu.quantity;
         }
       });
     }
@@ -281,27 +283,64 @@ const initSelectMenu = () => {
 const makeSelectedMenuList = (menuArrayObj) => {
   let selectedMenuList = document.createElement("div");
   selectedMenuList.className = "cart_item";
-  selectedMenuList.id = menuArrayObj.name;
+  selectedMenuList.id = menuArrayObj.code;
   selectedMenuList.innerHTML = `
     <div class="top">
         <span>${menuArrayObj.name}</span>
-        <button class="delete">X</button>
+        <button class="delete" id="${
+          menuArrayObj.code
+        }" onClick="itemDelete(this)">X</button>
     </div>
     <div class="middle">
         <span>수량</span>
         <div class="wrap__quantity">
-            <button class="plus">+</button>
-            <span>${menuArrayObj.quantity}</span>
-            <button class="minus">-</button>
+            <button class="plus" id="${
+              menuArrayObj.code
+            }" onClick="itemPlus(this)">+</button>
+            <input class="item_quantity" readonly type="text" value="${
+              menuArrayObj.quantity
+            }" />
+            <button class="minus" id="${
+              menuArrayObj.code
+            }" onClick="itemMinus(this)">-</button>
         </div>
     </div>
     <div class="buttom">
         <span>가격</span>
-        <span class="itme_price">${menuArrayObj.price}</span>
+        <span class="itme_price">${
+          menuArrayObj.price * menuArrayObj.quantity
+        }</span>
     </div>
     `;
 
   return selectedMenuList;
+};
+
+const itemPlus = (menuArrayObj) => {
+  selectedMenuList.map((selectedMenu) => {
+    if (selectedMenu.code === parseInt(menuArrayObj.id)) {
+      selectedMenu.quantity < 10 ? selectedMenu.quantity++ : false;
+    } else {
+    }
+  });
+  initSelectMenu();
+};
+
+const itemMinus = (menuArrayObj) => {
+  selectedMenuList.map((selectedMenu) => {
+    if (selectedMenu.code === parseInt(menuArrayObj.id)) {
+      selectedMenu.quantity > 1 ? selectedMenu.quantity-- : false;
+    } else {
+    }
+  });
+  initSelectMenu();
+};
+
+const itemDelete = (menuArrayObj) => {
+  selectedMenuList = selectedMenuList.filter(
+    (selectedMenu) => selectedMenu.code !== parseInt(menuArrayObj.id)
+  );
+  initSelectMenu();
 };
 
 const init = () => {
