@@ -68,7 +68,7 @@ const makeSelectMenuList = (element) => {
  * module 사용시의 문제점을 해결하기위해 윈도우 메서드로 추가
  */
 const kakaoRestTest = () => {
-  let itemName = paymentInformation.selectMenuList[0].name;
+  let itemName = paymentInformation.selectMenuList[2].name;
   let totalPrice = paymentInformation.totalPrice;
   let totalCount = paymentInformation.totalCount;
   let data = {

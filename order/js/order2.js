@@ -218,6 +218,8 @@ for (let i = 0; i < tabList.length; i++) {
 
 // 선택메뉴 리스트 배열
 let selectMenuList = [];
+let totalCount = 0;
+let totalPrice = 0;
 
 const menuArray = [coffeeMenus, teaMenus, sandwichMenus];
 const menuWrap = document.getElementById("menu_wrap");
@@ -266,7 +268,8 @@ const addMenu = (menuObj) => {
       code: menuObj.code,
       name: menuObj.name,
       price: menuObj.price,
-      quntity: 1,
+      totalPrice: menuObj.price,
+      quantity: 1,
     });
   } else {
     if (
@@ -278,12 +281,14 @@ const addMenu = (menuObj) => {
         code: menuObj.code,
         name: menuObj.name,
         price: menuObj.price,
-        quntity: 1,
+        totalPrice: menuObj.price,
+        quantity: 1,
       });
     } else {
       selectMenuList.map((menu) => {
         if (menu.code === menuObj.code) {
-          menu.quntity++;
+          menu.quantity++;
+          menu.totalPrice = menu.price * menu.quantity;
         }
       });
     }
@@ -292,17 +297,16 @@ const addMenu = (menuObj) => {
 };
 
 const initSelectMenu = () => {
-  let totalCount = 0;
-  let totalPrice = 0;
-
+  totalPrice = 0;
+  totalCount = 0;
   while (CartArea.hasChildNodes()) {
     CartArea.removeChild(CartArea.firstChild);
   }
 
   for (let i = 0; i < selectMenuList.length; i++) {
     CartArea.append(makeSelectMenuList(selectMenuList[i]));
-    totalCount += selectMenuList[i].quntity;
-    totalPrice += selectMenuList[i].price * selectMenuList[i].quntity;
+    totalCount += selectMenuList[i].quantity;
+    totalPrice += selectMenuList[i].price * selectMenuList[i].quantity;
   }
 
   document.getElementById("total_count").innerText = totalCount;
@@ -335,7 +339,7 @@ const makeSelectMenuList = (element) => {
         element.code
       }"  onclick="countPlus(this)">+</button>
       <input class="item_quantity" readonly type="text" value="${
-        element.quntity
+        element.quantity
       }">
       <button class="minus" id="${
         element.code
@@ -344,7 +348,7 @@ const makeSelectMenuList = (element) => {
     </div>
     <div class="bottom">
       <span>가격</span>
-      <span class="item_price">${element.price * element.quntity}</span>
+      <span class="item_price">${element.price * element.quantity}</span>
     </div>`;
   return selectMenuForm;
 };
@@ -352,7 +356,7 @@ const makeSelectMenuList = (element) => {
 const countPlus = (element) => {
   selectMenuList.map((menu) => {
     if (menu.code === parseInt(element.id)) {
-      menu.quntity++;
+      menu.quantity++;
     } else {
     }
   });
@@ -362,7 +366,7 @@ const countPlus = (element) => {
 const countMinus = (element) => {
   selectMenuList.map((menu) => {
     if (menu.code === parseInt(element.id)) {
-      menu.quntity > 1 ? menu.quntity-- : false;
+      menu.quantity > 1 ? menu.quantity-- : false;
     } else {
     }
   });
@@ -385,7 +389,15 @@ const init = () => {
 init();
 
 const goToPaymentPage = () => {
-  localStorage.setItem("selectMenuList", JSON.stringify(selectMenuList));
+  let paymentInformation = {
+    selectMenuList: selectMenuList,
+    totalPrice: totalPrice,
+    totalCount: totalCount,
+  };
+  localStorage.setItem(
+    "paymentInformation",
+    JSON.stringify(paymentInformation)
+  );
 
   location.href = "/payment/pages/payment.html";
 };
