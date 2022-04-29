@@ -192,7 +192,8 @@ for (let i = 0; i < tabList.length; i++) {
 const menuArray = [coffeeMenus, teaMenus, sandwichMenus];
 const menuWrap = document.getElementById("menu_wrap");
 const cartWrap = document.getElementById("wrap_cart_area");
-const selectedMenuList = [];
+let selectedMenuList = [];
+// 삭제 기능을 통해 변경 가능한 리스트이므로 const 사용 불가
 
 /* 메뉴리스트 만들기 */
 const getList = (menuArray) => {
@@ -276,40 +277,42 @@ const initSelectMenu = () => {
   }
 
   document.getElementById("total_quantity").innerText = totalCount;
-  document.getElementById("total_price").innerText = `${totalPrice}원`;
+  document.getElementById(
+    "total_price"
+  ).innerText = `${totalPrice.toLocaleString()}원`;
 };
 
 /* 선택메뉴 내 각 단일 선택한 메뉴 만들기 */
 const makeSelectedMenuList = (menuArrayObj) => {
-  let selectedMenuList = document.createElement("div");
+  const selectedMenuList = document.createElement("div");
   selectedMenuList.className = "cart_item";
   selectedMenuList.id = menuArrayObj.code;
   selectedMenuList.innerHTML = `
     <div class="top">
-        <span>${menuArrayObj.name}</span>
-        <button class="delete" id="${
-          menuArrayObj.code
-        }" onClick="itemDelete(this)">X</button>
+      <span>${menuArrayObj.name}</span>
+      <button class="delete" id="${
+        menuArrayObj.code
+      }" onClick="itemDelete(this)">X</button>
     </div>
     <div class="middle">
-        <span>수량</span>
-        <div class="wrap__quantity">
-            <button class="plus" id="${
-              menuArrayObj.code
-            }" onClick="itemPlus(this)">+</button>
-            <input class="item_quantity" readonly type="text" value="${
-              menuArrayObj.quantity
-            }" />
-            <button class="minus" id="${
-              menuArrayObj.code
-            }" onClick="itemMinus(this)">-</button>
-        </div>
+      <span>수량</span>
+      <div class="wrap__quantity">
+        <button class="plus" id="${
+          menuArrayObj.code
+        }" onClick="itemPlus(this)">+</button>
+        <input class="item_quantity" readonly type="text" value="${
+          menuArrayObj.quantity
+        }" />
+        <button class="minus" id="${
+          menuArrayObj.code
+        }" onClick="itemMinus(this)">-</button>
+      </div>
     </div>
     <div class="buttom">
-        <span>가격</span>
-        <span class="itme_price">${
-          menuArrayObj.price * menuArrayObj.quantity
-        }</span>
+      <span>가격</span>
+      <span class="itme_price">${(
+        menuArrayObj.price * menuArrayObj.quantity
+      ).toLocaleString()}</span>
     </div>
     `;
 
