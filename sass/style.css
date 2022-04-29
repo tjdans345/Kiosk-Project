@@ -183,6 +183,8 @@ body .ir_su {
   padding: 20px;
   box-sizing: border-box;
   cursor: pointer;
+  background-color: #e27575;
+  color: #e6e6e6;
 }
 .wrap .wrap__sects .sect__intro {
   width: 70%;
@@ -211,11 +213,23 @@ body .ir_su {
   padding: 16px;
   box-sizing: border-box;
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
 }
-.wrap .wrap__sects .sect__left .menu_tabs ul :hover,
-.wrap .wrap__sects .sect__left .menu_tabs ul .active {
-  color: #f4f4f4;
+.wrap .wrap__sects .sect__left .menu_tabs ul ::before {
+  content: "";
+  width: 100%;
+  height: 2px;
+  background-color: transparent;
+  position: absolute;
+  top: calc(100% - 2px);
+  left: -100%;
+  transition: 0.5s;
+}
+.wrap .wrap__sects .sect__left .menu_tabs ul :hover::before,
+.wrap .wrap__sects .sect__left .menu_tabs ul .active::before {
   background-color: #e27575;
+  left: 0;
 }
 .wrap .wrap__sects .sect__left .left_content {
   width: 100%;
@@ -223,6 +237,7 @@ body .ir_su {
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow-y: scroll;
 }
 .wrap .wrap__sects .sect__left .left_content .wrap__left {
   width: 100%;
@@ -237,17 +252,16 @@ body .ir_su {
 }
 .wrap .wrap__sects .sect__left .left_content .wrap__left .menu__wrap {
   width: 100%;
-  height: 100%;
+  height: auto;
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
   padding: 16px;
   box-sizing: border-box;
-  overflow-y: scroll;
 }
 .wrap .wrap__sects .sect__left .left_content .wrap__left .menu__wrap .menu {
   width: 44%;
-  height: 120px;
+  height: 100px;
   box-sizing: border-box;
   text-align: center;
   margin-bottom: 20px;
